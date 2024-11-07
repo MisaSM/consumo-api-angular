@@ -29,5 +29,5 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './tarea-list.component.css'
 })
 export class TareaListComponent {
-
+  tareas: any[] = [];
 }
