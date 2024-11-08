@@ -30,4 +30,20 @@ import { ButtonModule } from 'primeng/button';
 })
 export class TareaListComponent {
   tareas: any[] = [];
+  displayDialog: boolean = false;
+  tareaForm!: FormGroup;
+  usuarios: any[] = [];
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.tareaForm = this.fb.group({
+      idTarea: [null], //campo oculto para el ID
+      tarea: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      completada: [false],
+      usuarioo: [null, Validators.required],
+    });
+  }
+
 }
