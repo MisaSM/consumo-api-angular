@@ -46,4 +46,7 @@ export class TareaListComponent {
     });
   }
 
+  openDialog()  {
+    this.displayDialog = true;
+  }
 }

@@ -30,5 +30,22 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './usuario-list.component.css'
 })
 export class UsuarioListComponent {
+  usuarios: any[] = [];
+  displayDialog: boolean = false;
+  usuarioForm!: FormGroup;
 
+  constructor(private fb:FormBuilder) {}
+
+  ngOnInit() {
+    this.usuarioForm = this.fb.group({
+      idUsuario: [null],
+      names: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  openDialog() {
+    this.displayDialog = true;
+  }
 }
