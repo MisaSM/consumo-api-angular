@@ -6,6 +6,8 @@ import { DialogModule } from 'primeng/dialog';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button'; 
+import { TareaService } from '../../services/tarea/tarea.service';
+import { TareaModel } from '../../models/tarea/tarea.model';
 @Component({
   selector: 'app-tarea-list',
   standalone: true,
@@ -29,12 +31,12 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './tarea-list.component.css'
 })
 export class TareaListComponent {
-  tareas: any[] = [];
+  tareas: TareaModel[] = [];
   displayDialog: boolean = false;
   tareaForm!: FormGroup;
   usuarios: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private tareaService: TareaService) {}
 
   ngOnInit() {
     this.tareaForm = this.fb.group({
@@ -43,6 +45,16 @@ export class TareaListComponent {
       descripcion: ['', Validators.required],
       completada: [false],
       usuarioo: [null, Validators.required],
+    });
+
+    this.loadTareas();
+  }
+
+  loadTareas() {
+    console.log("Metodo loadtareas uwu");
+    this.tareaService.getTareas().subscribe((data) => {
+      this.tareas = data;
+      console.log(this.tareas);
     });
   }
 

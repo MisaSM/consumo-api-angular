@@ -5,8 +5,10 @@ import { importProvidersFrom } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appRouterProviders } from './app/app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 bootstrapApplication(AppComponent, 
   {providers: [appRouterProviders, 
+    provideHttpClient(),
     importProvidersFrom(RouterModule, BrowserAnimationsModule)
   ]}
 )
