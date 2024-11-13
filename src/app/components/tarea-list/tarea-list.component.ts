@@ -8,6 +8,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button'; 
 import { TareaService } from '../../services/tarea/tarea.service';
 import { TareaModel } from '../../models/tarea/tarea.model';
+import { UserModel } from '../../models/user/user.model';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 @Component({
   selector: 'app-tarea-list',
   standalone: true,
@@ -34,9 +36,11 @@ export class TareaListComponent {
   tareas: TareaModel[] = [];
   displayDialog: boolean = false;
   tareaForm!: FormGroup;
-  usuarios: any[] = [];
+  usuarios: UserModel[] = [];
 
-  constructor(private fb: FormBuilder, private tareaService: TareaService) {}
+  constructor(private fb: FormBuilder, private tareaService: TareaService,
+    private usuarioService: UsuarioService
+  ) {}
 
   ngOnInit() {
     this.tareaForm = this.fb.group({
@@ -48,6 +52,7 @@ export class TareaListComponent {
     });
 
     this.loadTareas();
+    this.loadUsuarios();
   }
 
   loadTareas() {
@@ -55,6 +60,16 @@ export class TareaListComponent {
     this.tareaService.getTareas().subscribe((data) => {
       this.tareas = data;
       console.log(this.tareas);
+    });
+  }
+
+  loadUsuarios() {
+    console.log("Metodo loadusuarios uwu");
+    this.usuarioService.getUsuarios().subscribe((data) => {
+      console.log(data);
+      this.usuarios = data;
+      
+      console.log(this.usuarios);
     });
   }
 
