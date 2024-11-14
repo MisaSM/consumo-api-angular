@@ -76,4 +76,33 @@ export class TareaListComponent {
   openDialog()  {
     this.displayDialog = true;
   }
+
+  saveTarea() {
+    if (this.tareaForm.valid) {
+      const tareaData = this.tareaForm.value;
+      this.createTarea(tareaData);
+    }
+  }
+
+  // createTarea(tareaData: any) {
+  //   this.tareaService.createTareas({
+  //     tarea: tareaData.tarea,
+  //     usuarioo: tareaData.usuarioo.idUsuario,
+  //     descripcion: tareaData.descripcion
+  //   }).subscribe(() => {
+  //     this.loadTareas();
+  //     this.displayDialog = false;
+  //   });
+  // }
+
+  createTarea(tareaData: any) {
+    this.tareaService.createTareas({
+      tarea: tareaData.tarea,
+      descripcion: tareaData.descripcion,
+      idUsuario: tareaData.usuarioo?.idUsuario,
+    }).subscribe(() => {
+      this.loadTareas();
+      this.displayDialog = false;
+    })
+  }
 }

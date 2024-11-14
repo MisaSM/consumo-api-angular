@@ -38,9 +38,9 @@
 </div>
 
 <p-dialog header="Tareas" [(visible)]="displayDialog" [modal]="true" 
-[closable]="true" [style]="{width: '400px', height: '400px'}">
+[closable]="true" [style]="{width: '400px', height: '400px'}" [contentStyle]="{'overflow': 'visible'}">
 
-<form [formGroup]="tareaForm">
+<form [formGroup]="tareaForm" (ngSubmit)="saveTarea()">
     <div class="mb-3">
         <label for="tarea" class="form-label">Tarea</label>
         <input id="tarea" pInputText formControlName="tarea" class="form-control">
@@ -61,7 +61,7 @@
     </div>
     <div class="d-flex justify-content-end">
         <button (click)="displayDialog = false" pButton type="button" label="Cancelar" class="btn btn-secondary me-2"></button>
-        <button pButton type="button" label="Guardar" class="btn btn-primary"></button>
+        <button pButton type="submit" label="Guardar" class="btn btn-primary" [disabled]="!tareaForm.valid"></button>
     </div>
 </form>
 
