@@ -23,13 +23,14 @@
                     <td>{{tarea.descripcion}}</td>
                     <td class="text-center">
                         <button pButton type="button"
+                        (click)="finishTarea(tarea)"
                         [label]="tarea.completada ? 'Si' : 'No'"
                         [class]="tarea.completada ? 'btn btn-success' : 'btn btn-secondary'"></button>
                     </td>
                     <td class="text-center">{{tarea.usuarioo?.nombres || 'Sin Asignar'}}</td>
                     <td class="text-center">
-                        <button pButton type="button" icon="pi pi-pencil" class="btn btn-sm btn-warning me-2" label="Editar"></button>
-                        <button pButton type="button" icon="pi pi-trash" class="btn btn-sm btn-danger" label="Eliminar"></button>
+                        <button (click)="openDialog(tarea)" pButton type="button" icon="pi pi-pencil" class="btn btn-sm btn-warning me-2" label="Editar"></button>
+                        <button (click)="deleteTarea(tarea.idTarea)" pButton type="button" icon="pi pi-trash" class="btn btn-sm btn-danger" label="Eliminar"></button>
                     </td>
                 </tr>
             </ng-template>
@@ -49,7 +50,7 @@
         <label for="descripcion" class="form-label">Descripción</label>
         <input id="descripcion" pInputText formControlName="descripcion" class="form-control">
     </div>
-    <div class="mb-3">
+    <div [hidden]="isEditing"  class="mb-3">
         <label for="usuario" class="form-label me-2">Usuario</label>
         <p-dropdown
         id="usuario"
