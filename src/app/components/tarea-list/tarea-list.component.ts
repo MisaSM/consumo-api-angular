@@ -39,7 +39,6 @@ export class TareaListComponent {
   usuarios: UserModel[] = [];
   isEditing: boolean = false;
 
-
   constructor(private fb: FormBuilder, private tareaService: TareaService,
     private usuarioService: UsuarioService
   ) {}
@@ -70,12 +69,21 @@ export class TareaListComponent {
     this.usuarioService.getUsuarios().subscribe((data) => {
       console.log(data);
       this.usuarios = data;
-      
       console.log(this.usuarios);
     });
   }
 
-  openDialog(tarea?: any)  {
+  // openDialog(tarea?: any)  {
+  //   this.displayDialog = true;
+  //   this.isEditing = tarea;
+  //   if (tarea) {
+  //     this.tareaForm.patchValue(tarea);
+  //   } else {
+  //     this.tareaForm.reset();
+  //   }
+  // }
+
+  openDialog(tarea?: any) {
     this.displayDialog = true;
     this.isEditing = tarea;
     if (tarea) {
@@ -83,7 +91,7 @@ export class TareaListComponent {
     } else {
       this.tareaForm.reset();
     }
-  }
+  } 
 
   saveTarea() {
     if (this.tareaForm.valid) {
@@ -96,7 +104,6 @@ export class TareaListComponent {
     }
   }
 
-
   createTarea(tareaData: any) {
     this.tareaService.createTareas({
       tarea: tareaData.tarea,
@@ -107,15 +114,14 @@ export class TareaListComponent {
       this.displayDialog = false;
     })
   }
-
   updateTarea(tareaData: any) {
     this.tareaService.updateTareas(tareaData.idTarea, {
       tarea: tareaData.tarea,
-      descripcion: tareaData.descripcion,
+      descripcion: tareaData.descripcion
     }).subscribe(() => {
       this.loadTareas();
       this.displayDialog = false;
-    })
+    });
   }
 
   deleteTarea(id: number) {
